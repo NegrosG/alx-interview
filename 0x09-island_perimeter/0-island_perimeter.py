@@ -1,31 +1,19 @@
 #!/usr/bin/python3
-
-""" island perimeter solution """
+"""
+Island Perimeter:
+    returns the perimeter of the island described in grid
+"""
 
 
 def island_perimeter(grid):
-    """global function for island"""
-    visit = set()
-
-    def dfs(i, j):
-        """function for testing the island"""
-        if (i >= len(grid) or j >= len(grid[0]) or i < 0 or j < 0 or
-                grid[i][j] == 0):
-            return 1
-        if (i, j) in visit:
-            return 0
-        visit.add((i, j))
-        perim = dfs(i, j + 1)
-        perim += dfs(i + 1, j)
-        perim += dfs(i, j - 1)
-        perim += dfs(i - 1, j)
-        """ return perim """
-        return perim
-
+    """island perimenter function"""
+    perimeter = 0
     for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            if grid[i][j]:
-                """return the dfs function"""
-                return dfs(i, j)
-    """ If no land cells are found, the perimeter is 0 """
-    return 0
+        for j in range(len(grid[i])):
+            if grid[i][j] == 1:
+                perimeter += 4
+                if i > 0 and grid[i-1][j] == 1:
+                    perimeter -= 2
+                if j > 0 and grid[i][j-1] == 1:
+                    perimeter -= 2
+    return perimeter
